@@ -20,10 +20,10 @@ const Herox = ({
   // const [department, setDepartment] = useState("");
   // const [mobileNumber, setMobileNumber] = useState("");
   // const [dob, setDob] = useState("");
-  
+
   // eslint-disable-next-line
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [submittedData, setSubmittedData] = useState(null);
+  const [submittedData, setSubmittedData] = useState([]);
   useEffect(() => {
     const storedUserType = localStorage.getItem("userType");
     const storedDepartment = localStorage.getItem("department");
@@ -35,10 +35,10 @@ const Herox = ({
     if (storedMobileNumber) setMobileNumber(storedMobileNumber);
     if (storedDob) setDob(storedDob);
 
-    const submittedData = JSON.parse(localStorage.getItem('submittedData'));
-    if (submittedData) {
+    const storedSubmittedData = JSON.parse(localStorage.getItem('submittedData'));
+    if (Array.isArray(storedSubmittedData) && storedSubmittedData.length > 0) {
       setIsSubmitted(true);
-      setSubmittedData(submittedData);
+      setSubmittedData(storedSubmittedData);
     }
   }, [setUserType, setDepartment, setMobileNumber, setDob]);
 
@@ -64,8 +64,9 @@ const Herox = ({
       mobileNumber,
       dob,
     };
-    setSubmittedData(dataToSubmit);
-    localStorage.setItem('submittedData', JSON.stringify(dataToSubmit));
+    setSubmittedData([...submittedData, dataToSubmit]);
+    localStorage.setItem('submittedData', JSON.stringify([...submittedData, dataToSubmit]));
+    setIsSubmitted(true);
   };
   return (
     <div>
@@ -113,13 +114,18 @@ const Herox = ({
       <button onClick={handleButtonClick}>Submit</button>
 
       
-      {submittedData && (
+      {isSubmitted && (
         <div>
-          <p>Data from Local Storage:</p>
-          <p>Selected User Type: {userType}</p>
-          <p>Selected Department: {department}</p>
-          <p>Mobile Number: {mobileNumber}</p>
-          <p>Date of Birth: {dob}</p>
+          <p>Submitted Data:</p>
+          {(submittedData || []).map((data, index) => (
+            <div key={index}>
+              <p>Entry {index + 1}:</p>
+              <p>Selected User Type: {data.userType}</p>
+              <p>Selected Department: {data.department}</p>
+              <p>Mobile Number: {data.mobileNumber}</p>
+              <p>Date of Birth: {data.dob}</p>
+            </div>
+          ))}
         </div>
       )}
     </div>
