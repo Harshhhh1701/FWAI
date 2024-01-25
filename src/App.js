@@ -1,8 +1,13 @@
 import React from 'react'
+import Herox from './pages/Herox'
+import { Provider } from 'react-redux';
+import store from './store';
 
 const App = () => {
   return (
-    <div>App</div>
+    <Provider store={store}>
+      <Herox />
+    </Provider>
   )
 }
 
