@@ -1,6 +1,22 @@
 # DEPLOYED LINK
 https://fwai-chi.vercel.app/
 
+# Front End Developer - React JS - Assessment
+Create a web applica-on using ReactJS and Redux.
+Single web page for adding fields dynamically and Single web page to display the added
+fields dynamically.
+Page will have one drop down with values ”Student”, “Self-Employee” and “Business”
+By Selec-ng anyone in the dropdown, the user needs to define the input fields and data to
+be collected with valida-ons.
+Input Fields:
+1. Should be limited to add maximum of 4 fields.
+2. Only Text box, Drop-Down and Date picker should be allowed.
+3. Same data type field can be repeated without restric-ons.
+4. For each field: Field Name, Field Type, Field Valida-on and Field Data (Dropdown).
+Should be entered – Sample screens below.
+All the below saved data should be stored in Redux, this data should be retained even aTer
+page reload.
+
 
 # Getting Started with Create React App
 
